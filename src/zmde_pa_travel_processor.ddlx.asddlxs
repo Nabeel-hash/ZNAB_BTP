@@ -1,0 +1,92 @@
+@Metadata.layer:#CUSTOMER
+@UI.headerInfo: { typeName: 'Travel',
+                  typeNamePlural: 'Travel Projects'
+}
+
+annotate entity ZNAB_RAP_TRAVEL_PROJ with
+{
+
+ @UI.facet: [ { 
+               purpose: #HEADER, 
+               type:    #DATAPOINT_REFERENCE, 
+               position :10, 
+               targetQualifier: 'price' 
+               },
+               { purpose: #HEADER, 
+                type: #DATAPOINT_REFERENCE, 
+                position: 20, 
+                targetQualifier: 'status'
+               },
+               { 
+                id:'super',
+                purpose: #STANDARD,
+                type: #COLLECTION,
+                label:'Additional Details',
+                position: 10             
+               },
+               {   
+                 purpose: #STANDARD,
+                 type: #IDENTIFICATION_REFERENCE, 
+                 position:10,
+                 label: 'Travel Details',
+                 parentId: 'super' 
+               },
+               { 
+                purpose: #STANDARD,
+                type: #FIELDGROUP_REFERENCE,
+                position: 20,
+                label:'Price Info',
+                parentId: 'super',
+                targetQualifier: 'price_info'               
+               },
+              { id: 'booking' , 
+                purpose: #STANDARD , 
+                type: #LINEITEM_REFERENCE , 
+                label : 'BookingDetails' , 
+                position: 20 , 
+                targetElement: '_bookings' }
+            ]
+             
+  @UI:{selectionField: [{ position: 10 }],
+       lineItem: [{ position: 10 , importance: #HIGH } ,
+                  { type: #FOR_ACTION , label: 'Copy Travel' , dataAction: 'copyTravel' }],
+       identification: [{ position: 10 },
+                        { type: #FOR_ACTION , label: 'Copy Travel Item' , dataAction: 'copyTravel'}]
+       
+  }
+  TravelId;
+  @UI:{selectionField: [{ position: 20 }],
+       lineItem: [{ position: 20  ,  importance: #HIGH }],
+       identification: [{ position: 20 }]
+  }
+  AgencyId;
+ 
+  @UI:{selectionField: [{ position: 30 }],
+       lineItem: [{ position: 30  , importance: #HIGH }],
+       identification: [{ position: 30 }]
+  }
+  CustomerId;
+  @UI:{ lineItem: [{ position: 40  , importance: #HIGH }],
+        dataPoint: { qualifier: 'price' },
+        fieldGroup: [{ qualifier: 'price_info' , label:'Price' }]
+  }
+  TotalPrice;
+  @UI:{ lineItem: [{ position: 50 }],
+        fieldGroup: [{ qualifier: 'price_info' , label:'Booking Fee' }] 
+      }  
+  BookingFee;
+ 
+ @UI: { lineItem: [{ position: 60 }] ,
+        fieldGroup: [{ qualifier: 'price_info' , label:'Currency Code' }]}
+ CurrencyCode;
+ 
+  @UI:{ selectionField: [{ position: 40 }],
+        lineItem: [{ position: 70 , criticality: 'StatusCricticality' , importance: #HIGH }],
+        identification: [{ position: 40 }],
+        textArrangement: #TEXT_ONLY,
+        dataPoint:{ qualifier: 'status', criticality: 'StatusCricticality' }
+  
+  }
+  OverallStatus;
+  
+}

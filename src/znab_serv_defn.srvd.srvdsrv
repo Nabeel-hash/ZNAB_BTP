@@ -1,0 +1,11 @@
+@EndUserText.label: 'Service Definition Travel'
+define service ZNAB_SERV_DEFN {
+  expose ZNAB_RAP_TRAVEL_PROJ     as travel;
+  expose ZNAB_RAP_BOOKING_PROJ    as booking;
+  expose ZNAB_RAP_SUPPL_PROJ      as supplement;
+  expose /DMO/I_Agency            as Agency;
+  expose /DMO/I_Customer          as Customer;
+  expose /DMO/I_Carrier           as Carrier;
+  expose /DMO/I_Connection        as Connection;
+  expose /DMO/I_Booking_Status_VH as BookingStatus;
+}

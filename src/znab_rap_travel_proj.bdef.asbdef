@@ -1,0 +1,31 @@
+projection;
+strict ( 2 );
+
+define behavior for ZNAB_RAP_TRAVEL_PROJ alias travel
+{
+  use create;
+  use update;
+  use delete;
+
+  use action copyTravel;
+  use association _bookings { create; }
+
+}
+
+define behavior for ZNAB_RAP_BOOKING_PROJ alias booking
+{
+  use update;
+  use delete;
+
+  use association _Travel;
+  use association _Supplement { create; }
+}
+
+define behavior for ZNAB_RAP_SUPPL_PROJ alias bookSuppl
+{
+  use update;
+  use delete;
+
+  use association _Travel;
+  use association _Booking;
+}
